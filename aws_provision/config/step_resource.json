@@ -1,0 +1,589 @@
+{
+  "resource_management_cdk_step": {
+    "Comment": "A description of my state machine",
+    "StartAt": "Write to sqs",
+    "States": {
+      "Write to sqs": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_write_sqs"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Execute modules"
+      },
+      "Execute modules": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.rule_engine",
+            "BooleanEquals": true,
+            "Next": "Call rule engine"
+          }
+        ],
+        "Default": "Call DataProcessor"
+      },
+      "Call rule engine": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_execute_ruleengine"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "End": true
+      },
+      "Call DataProcessor": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_execute_data_processor"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "End": true
+      }
+    }
+  },
+  "rule_engine_resource_management_cdk_step": {
+    "Comment": "A description of my state machine",
+    "StartAt": "Read Sqs messages",
+    "States": {
+      "Read Sqs messages": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_rule_engine_readsqs"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Check available clusters"
+      },
+      "Check available clusters": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_rule_engine_check_active_emr"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Retrieve cores"
+      },
+      "Retrieve cores": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_rule_engine_retrievecores"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Check if cluster has enough cores"
+      },
+      "Check if cluster has enough cores": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.cluster_available",
+            "BooleanEquals": true,
+            "Next": "Wait"
+          }
+        ],
+        "Default": "Create cluster"
+      },
+      "Wait": {
+        "Type": "Wait",
+        "Seconds": 5,
+        "Next": "Check batch message status"
+      },
+      "Check batch message status": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_rule_engine_check_next_sqs"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Check if more batches available"
+      },
+      "Check if more batches available": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.msg_exist",
+            "BooleanEquals": true,
+            "Next": "Read Sqs messages"
+          }
+        ],
+        "Default": "Check clusters state"
+      },
+      "Check clusters state": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_rule_engine_check_cluster_state"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "If all clusters are available"
+      },
+      "If all clusters are available": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.state",
+            "StringEquals": "Ready",
+            "Next": "Submit job"
+          },
+          {
+            "Variable": "$.state",
+            "StringEquals": "Wait",
+            "Next": "Wait 1 minute"
+          }
+        ]
+      },
+      "Submit job": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_rule_engine_submit_job"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Check pending jobs"
+      },
+      "Check pending jobs": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.steps_pending",
+            "BooleanEquals": true,
+            "Next": "Check jobs status"
+          },
+          {
+            "Variable": "$.steps_pending",
+            "BooleanEquals": false,
+            "Next": "Success"
+          }
+        ]
+      },
+      "Check jobs status": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_rule_engine_check_job_status"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Wait 10 sec"
+      },
+      "Wait 10 sec": {
+        "Type": "Wait",
+        "Seconds": 10,
+        "Next": "Submit job"
+      },
+      "Success": {
+        "Type": "Succeed"
+      },
+      "Create cluster": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_rule_engine_create_emr"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Wait"
+      },
+      "Wait 1 minute": {
+        "Type": "Wait",
+        "Seconds": 60,
+        "Next": "Check clusters state"
+      }
+    }
+  },
+  "cdep_resource_management_cdk_step": {
+    "Comment": "A description of my state machine",
+    "StartAt": "Read Sqs messages",
+    "States": {
+      "Read Sqs messages": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_dwh_readsqs"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Check available clusters"
+      },
+      "Check available clusters": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_dwh_check_active_emr"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Retrieve cores"
+      },
+      "Retrieve cores": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_dwh_retrievecores"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Check if cluster has enough cores"
+      },
+      "Check if cluster has enough cores": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.cluster_available",
+            "BooleanEquals": true,
+            "Next": "Wait"
+          }
+        ],
+        "Default": "Create cluster"
+      },
+      "Wait": {
+        "Type": "Wait",
+        "Seconds": 5,
+        "Next": "Check batch message status"
+      },
+      "Check batch message status": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_dwh_check_next_sqs"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Check if more batches available"
+      },
+      "Check if more batches available": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.msg_exist",
+            "BooleanEquals": true,
+            "Next": "Read Sqs messages"
+          }
+        ],
+        "Default": "Check clusters state"
+      },
+      "Check clusters state": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_dwh_check_cluster_state"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "If all clusters are available"
+      },
+      "If all clusters are available": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.state",
+            "StringEquals": "Ready",
+            "Next": "Submit job"
+          },
+          {
+            "Variable": "$.state",
+            "StringEquals": "Wait",
+            "Next": "Wait 1 minute"
+          }
+        ]
+      },
+      "Submit job": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_dwh_submit_job"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Check pending jobs"
+      },
+      "Check pending jobs": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.steps_pending",
+            "BooleanEquals": true,
+            "Next": "Check jobs status"
+          },
+          {
+            "Variable": "$.steps_pending",
+            "BooleanEquals": false,
+            "Next": "Success"
+          }
+        ]
+      },
+      "Check jobs status": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_dwh_check_job_status"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Wait 10 sec"
+      },
+      "Wait 10 sec": {
+        "Type": "Wait",
+        "Seconds": 10,
+        "Next": "Submit job"
+      },
+      "Success": {
+        "Type": "Succeed"
+      },
+      "Create cluster": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "OutputPath": "$.Payload",
+        "Parameters": {
+          "Payload.$": "$",
+          "FunctionName": "cdep_dwh_create_emr"
+        },
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "Lambda.ServiceException",
+              "Lambda.AWSLambdaException",
+              "Lambda.SdkClientException"
+            ],
+            "IntervalSeconds": 2,
+            "MaxAttempts": 6,
+            "BackoffRate": 2
+          }
+        ],
+        "Next": "Wait"
+      },
+      "Wait 1 minute": {
+        "Type": "Wait",
+        "Seconds": 60,
+        "Next": "Check clusters state"
+      }
+    }
+  }
+}

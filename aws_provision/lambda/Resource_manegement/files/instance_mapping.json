@@ -1,0 +1,56 @@
+[
+  {
+    "instance_id": "1",
+    "instance_name": "m5.2xlarge",
+    "driver": "m5.xlarge",
+    "max_cores": "14",
+    "min_cores": "2",
+    "no_of_instance": "2",
+    "executor_memory": "5G"
+  },
+  {
+    "instance_id": "2",
+    "instance_name": "m5.2xlarge",
+    "driver": "m5.xlarge",
+    "max_cores": "28",
+    "min_cores": "16",
+    "no_of_instance": "4",
+    "executor_memory": "5G"
+  },
+  {
+    "instance_id": "3",
+    "instance_name": "m5.2xlarge",
+    "driver": "m5.2xlarge",
+    "max_cores": "42",
+    "min_cores": "30",
+    "no_of_instance": "6",
+    "executor_memory": "5G"
+  },
+  {
+    "instance_id": "4",
+    "instance_name": "m5.2xlarge",
+    "driver": "m5.2xlarge",
+    "max_cores": "56",
+    "min_cores": "44",
+    "no_of_instance": "8",
+    "executor_memory": "5G"
+  },
+  {
+    "instance_id": "5",
+    "instance_name": "m5.2xlarge",
+    "driver": "m5.4xlarge",
+    "max_cores": "70",
+    "min_cores": "58",
+    "no_of_instance": "10",
+    "executor_memory": "5G"
+  },
+  {
+    "instance_id": "6",
+    "instance_name": "m5.2xlarge",
+    "driver": "m5.4xlarge",
+    "max_cores": "9999999",
+    "min_cores": "72",
+    "no_of_instance": "12",
+    "executor_memory": "5G"
+  }
+]

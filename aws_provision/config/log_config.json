@@ -1,0 +1,13 @@
+{
+    "log_groups" : [
+        {
+            "log_name": "DEP_Rule_Engine"
+        },
+        {
+            "log_name": "DEP_Data_Processor"
+        },
+        {
+            "log_name": "DEP_Pre_Processor"       
+        }
+    ]
+}

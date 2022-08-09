@@ -1,0 +1,35 @@
+class rule_helper_constants:
+    AUDIT_TABLE = "db_audit_table"
+    REGION_NAME = "region_name"
+    ID = "id"
+    COUNT_SOURCE_LEVEL = "count_source_level"
+    COUNT_VALID = "count_valid"
+    COUNT_INVALID = "count_invalid"
+    START_TIME = "start_time"
+    STATUS = "status"
+    END_TIME = "end_time"
+    CLIENT_NAME = "client_name"
+    BATCH_ID = "batch_id"
+    TABLE_NAME = "table_name"
+    STATUS_TABLE = "db_status_table"
+    ERROR_DETAIL = "error_detail"
+    LOG_GROUP = "log_group"
+    INFO = "Info"
+    INFO_RE_STARTED = "[****Rule Engine Jobs Started*********]"
+    COUNT_ROW_LEVEL = "count_row_level"
+    ITEMS = "Items"
+    PARAMS = "params"
+    BUCKET_NAME = "bucket_name"
+    FIELDS = "fields"
+    DELIMETER = "delimiter"
+    FIELDNAME = "fieldname"
+    PROFILE_ENV = "profile_env"
+    DEL_COUNT_ALIAS='delimeter_count'
+    DQ_COUNT_ALIAS='Double_Quotes_count'
+    ROW_HAVING_LINEBREAK='LINEBREAK'
+    COL_NAME_LINEBREAK='value'
+    LINEBREAK_GRP_NAME='group'
+    LINEBREAK_ID='id'
+    LINEBREAK_SEGMENT='segment'
+    EXECUTION_ID='execution_id'
+

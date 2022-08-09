@@ -1,0 +1,19 @@
+{
+    "Deploy_backend":true,
+    "Applications": 
+
+        {
+            "Backend" : {"ApplicationName": "dep-spring-backend",
+                "EnvironmentName": "dep-test-env",
+                "Namespace": "ElasticBeanstalk",
+                "Solution_Stack_Name": "64bit Amazon Linux 2 v3.2.13 running Corretto 11",
+                "S3_Asset" : "assets/dep-backend.jar"},
+            
+            "Frontend": {"ApplicationName": "dep-react-frontend",
+                "EnvironmentName": "dep-front-test-env",
+                "Namespace": "ElasticBeanstalk",
+                "Solution_Stack_Name": "64bit Amazon Linux 2 v3.2.13 running Node.js 16",
+                "S3_Asset" : "assets/react-deploy.zip"
+               }
+      }
+}

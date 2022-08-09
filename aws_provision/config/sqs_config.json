@@ -1,0 +1,7 @@
+{
+    "queue" : [
+        {
+            "queue_name":"dep_test_queue.fifo"
+        }
+    ]
+}

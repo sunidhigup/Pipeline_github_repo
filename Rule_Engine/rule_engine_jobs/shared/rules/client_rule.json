@@ -1,0 +1,42 @@
+{
+	"filelevelrules": 
+	{
+		"lineoperations": 
+		{
+			"ignoreblanklines": "True",
+			"skipheaders": "True",
+			"skiptrailers": "True"
+		}
+	},
+	"fieldlevelrules": 
+	{
+		"numeric": {},
+		"int":{
+			"decimaldefaultvalue": "0",
+			"numericcharacters": "^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$",
+			"setscaleroundingmode": "True",
+			"rulename": "decimal_validation"
+                        
+		},
+		"bigint":{},
+		"smalldatetime": {},
+		"datetime":
+					{
+					"datedefaultvalue": "NULL",
+					"daterangecheck": "False",
+					"dateoutputformat": "yyyy-MM-dd HH:mm:ss",
+					"known_invalid_date_list": ["0"]
+					},
+		"datetime2":{},
+		"datetimeoffset": {},
+		"date": {},
+		"time": {},
+		"timestamp": {},
+		"bool":{},
+		"varchar":{},
+		"nvarchar": {},
+		"integer": {},
+		"double": {},
+		"string": {}
+	}
+}

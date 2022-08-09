@@ -1,0 +1,5 @@
+{
+    "aws_cdk":"aws-cdk.core==1.109.0",
+    "python":">=3.6",
+    "setup":"0.0.1"
+}

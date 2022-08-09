@@ -1,0 +1,85 @@
+{
+  "name": "",
+  "transformer_execution_details": {
+  },
+  "spark_config": {},
+  "udf": {},
+  "steps": [
+    {
+      "method_name": "ExecuteSQL",
+      "params": {
+        "definitions": [
+          {
+            "step_number": "1",
+            "step_name": "ExecuteSQL_query1",
+            "df": "table1",
+            "db_name": "cdep_catalog",
+            "statement": "SELECT id, name, city from cdep_glue_table1 where id is not null",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "2",
+            "step_name": "ExecuteSQL_query2",
+            "df": "table2",
+            "db_name": "cdep_catalog",
+            "statement": "SELECT id, phone from cdep_glue_table2 where id is not null",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "3",
+            "step_name": "ExecuteSQL_query3",
+            "df": "cdep_glue_table1_join_cdep_glue_table2",
+            "db_name": "cdep_catalog",
+            "statement": "select a.id, a.name, a.city, b.phone from table1 a join table2 b ON a.id = b.id",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          }
+        ]
+      }
+    },
+    {
+      "method_name": "JoinTable",
+      "step_number": "4",
+      "step_name": "Join_Table_1",
+      "params": {
+        "df": "cdep_glue_table1_join_cdep_glue_table2_dynamic",
+        "join_type": "left",
+        "join_condition": "table1.id = table2.id",
+        "select_cols": "table1.id as EMP_ID, table1.name, table1.city, table2.phone, CONCAT(table1.id, table2.phone) AS key",
+        "join_filter": "table1.id = 2",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "table1": {
+          "table1_df": "table1",
+          "table1_cols": "id, name, city",
+          "table1_filter": "id IS NOT NULL"
+        },
+        "table2": {
+          "table2_df": "table2",
+          "table2_cols": "id, phone",
+          "table2_filter": "id IS NOT NULL"
+        },
+        "action": "show"
+      }
+    },
+    {
+      "step_name": "save",
+      "method_name": "Write",
+      "step_number": "5",
+      "params": {
+        "format": "csv",
+        "overwrite": true,
+        "df": "cdep_glue_table1_join_cdep_glue_table2",
+        "path": "s3://cdep/CDEP_Catalog/cdep_glue_table1_join_cdep_glue_table2/",
+        "partition": true,
+        "persist": "",
+        "persist_type": ""
+      }
+    }
+  ]
+}

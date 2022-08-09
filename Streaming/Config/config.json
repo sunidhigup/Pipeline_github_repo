@@ -1,0 +1,22 @@
+{
+    "wait_time":1000,
+    "stopping_criteria":100,
+    "count":0,
+    "coalesce":1,
+    "schema_path":"emr/table_layout_json.json",
+    "analytics_path" :  "dashboard/",
+    "s3_ext":"s3://",
+    "input_prefix": "input/",
+    "checkpoint_prefix": "checkpoint/",
+    "customer_360": "arn:aws:states:us-east-1:955658629586:stateMachine:Dep_analytics360",
+    "resource_management":"arn:aws:states:us-east-1:955658629586:stateMachine:Resource_Management",
+    "client_name" : "cdep_rule_engine",
+    "Partition_key": "1",
+    "chunk_size":10,
+    "data_chunk_size": 500,
+    "sleep_time":1,
+    "secret_name" : "dep_aws_credentials",
+    "Kinesis_Data_Stream" : "dep_stream_table",
+    "region": "us-east-1",
+    "profile_name" : "cdep"
+}

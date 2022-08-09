@@ -1,0 +1,9 @@
+{
+    "format":"csv",
+    "header": true,
+    "column_name": "SSN",
+    "mode":"overwrite",
+    "Bucket" :"cdep-demo",
+    "tableName" :"cdep_file_classification"
+
+}

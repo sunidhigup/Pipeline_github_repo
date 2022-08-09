@@ -1,0 +1,10 @@
+{
+  "Partition_key": "1",
+  "chunk_size":10,
+  "data_chunk_size": 500,
+  "sleep_time":1,
+  "secret_name" : "dep_aws_credentials",
+  "Kinesis_Data_Stream" : "dep_stream_table",
+  "region": "us-east-1",
+  "profile_name" : "dep"
+}

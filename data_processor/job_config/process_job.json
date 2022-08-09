@@ -1,0 +1,113 @@
+{
+  "name": "",
+  "transformer_execution_details": {
+  },
+  "spark_config": {},
+  "udf": {},
+  "steps": [
+    {
+      "step_name": "read",
+      "method_name": "Read",
+      "params": [{
+        "format": "csv",
+        "path": "s3://ultragenic-dwh/input/emp_data.txt",
+        "temp_view_name": "temp_view_1",
+        "persist": "",
+        "persist_type": ""
+      },
+      {
+        "format": "csv",
+        "path": "s3://ultragenic-dwh/input/emp_data.txt",
+        "temp_view_name": "temp_view_2",
+        "persist": "",
+        "persist_type": ""
+      }]
+    },
+		{
+        "step_name": "udf",
+        "method_name": "UDF",
+        "params": {
+          "db_name": "",
+          "definitions": [
+            {
+              "udf": ["date_udf", "numeric_udf"],
+              "is_final": false
+            }
+          ],
+          "persist": "",
+          "persist_type": ""
+      },
+      "next_steps": []
+    },
+    {
+        "step_name": "cleaning",
+        "method_name": "ExecuteSQL",
+        "params": {
+          "db_name": "",
+          "definitions": [
+            {
+              "statement": "SELECT empno,ename,designation,manager,hire_date,sal,deptno from ${temp_view_df}",
+              "is_final": false
+            },
+            {
+              "statement": "select * from ${temp_view_df} where empno is not NULL",
+              "is_final": true
+            }
+          ],
+          "persist": "",
+          "persist_type": ""
+      },
+      "next_steps": []
+    },
+    {
+      "step_name": "transform",
+      "method_name": "ExecuteSQL",
+      "params": {
+        "db_name": "",
+        "definitions": [
+          {
+            "statement": [{
+              "col_statement_ops": {},
+              "type_statement_ops": {"string": "translate(`${col_name}`, '\t', ' ') as `${col_name}`"},
+              "where_ops": {}
+            }],
+			"temp_view_name": "transform_df_temp_view",
+            "is_final": true
+          }
+        ],
+        "temp_view_name": "transform_df_temp_view",
+        "persist": "",
+        "persist_type": ""
+      }
+    },
+	{
+        "step_name": "aggregation",
+        "method_name": "Aggregation",
+        "params": {
+          "db_name": "",
+          "definitions": [
+            {
+              "statement": "select * from temp_view_1 join temp_view_2 on temp_view_1.empno=temp_view_2.empno",
+              "temp_view_name": "temp_view_7",
+              "is_final": false
+            }
+          ],
+          "persist": "",
+          "persist_type": ""
+      },
+      "next_steps": []
+    },
+    {
+      "step_name": "save",
+      "method_name": "Write",
+      "params": {
+        "format": "csv",
+        "overwrite": true,
+        "path": "s3://ultragenic-dwh/output",
+        "partition": true,
+        "persist": "",
+        "persist_type": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+    "jsonversion": "1.0",
+    "revision": "1.0",
+    "fields": [
+	{
+            "fieldname": "hire_date",
+            "fieldrules": [
+                {
+                    "rulename": "date_convert",
+					"args": [
+                        {
+                            "argvalue": "MM/dd/yyyy HH:mm:ss a"
+                        }
+                    ]
+                }
+            ]
+        }
+]
+}

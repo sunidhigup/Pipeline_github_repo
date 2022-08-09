@@ -1,0 +1,7 @@
+instance_id,instance_name,driver,max_cores,min_cores,no_of_instance,executor_memory
+1,m5.2xlarge,m5.xlarge,14,2,2,5G
+2,m5.2xlarge,m5.xlarge,28,16,4,5G
+3,m5.2xlarge,m5.2xlarge,42,30,6,5G
+4,m5.2xlarge,m5.2xlarge,56,44,8,5G
+5,m5.2xlarge,m5.4xlarge,70,58,10,5G
+6,m5.2xlarge,m5.4xlarge,9999999,72,12,5G

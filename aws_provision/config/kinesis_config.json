@@ -1,0 +1,6 @@
+{
+    "logical_id":"cdekStream",
+    "name":"CDEP",
+    "shard":1,
+    "retention_period":24
+}

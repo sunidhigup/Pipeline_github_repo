@@ -1,0 +1,40 @@
+{
+  "name": "",
+  "transformer_execution_details": {
+  },
+  "spark_config": {},
+  "udf": {},
+  "steps": [
+    {
+      "method_name": "Read",
+      "params": {
+        "definitions": [
+          {
+            "step_name": "read_golden_record_csv",
+            "step_number": "1",
+            "df": "cust_golden",
+            "format": "csv",
+            "path": "s3://cdep/Glue/MDM/customer/c1.csv",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          }
+        ]
+      }
+    },
+    {
+      "step_name": "save_cust_golden",
+      "method_name": "Write",
+      "step_number": "19",
+      "params": {
+        "format": "csv",
+        "overwrite": "True",
+        "df": "cust_golden",
+        "path": "s3://cdep/CDEP_Catalog/cust_golden/",
+        "partition": "True",
+        "persist": "",
+        "persist_type": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,346 @@
+{
+  "name": "",
+  "transformer_execution_details": {
+  },
+  "spark_config": {},
+  "udf": {},
+  "steps": [
+    {
+      "method_name": "ExecuteSQL",
+      "params": {
+        "definitions": [
+          {
+            "step_number": "1",
+            "step_name": "ExecuteSQL_query1",
+            "df": "account",
+            "db_name": "cdep_catalog",
+            "statement": "SELECT * from cdep_glue_account",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "2",
+            "step_name": "ExecuteSQL_query2",
+            "df": "card",
+            "db_name": "cdep_catalog",
+            "statement": "SELECT * from cdep_glue_card",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "3",
+            "step_name": "ExecuteSQL_query3",
+            "df": "client",
+            "db_name": "cdep_catalog",
+            "statement": "select * from cdep_glue_client",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "4",
+            "step_name": "ExecuteSQL_query4",
+            "df": "disp",
+            "db_name": "cdep_catalog",
+            "statement": "SELECT * from cdep_glue_disp",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "5",
+            "step_name": "ExecuteSQL_query5",
+            "df": "district",
+            "db_name": "cdep_catalog",
+            "statement": "SELECT * from cdep_glue_district",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "6",
+            "step_name": "ExecuteSQL_query6",
+            "df": "loan",
+            "db_name": "cdep_catalog",
+            "statement": "select * from cdep_glue_loan",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "7",
+            "step_name": "ExecuteSQL_query7",
+            "df": "order",
+            "db_name": "cdep_catalog",
+            "statement": "SELECT * from cdep_glue_order",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "8",
+            "step_name": "ExecuteSQL_query8",
+            "df": "trans",
+            "db_name": "cdep_catalog",
+            "statement": "select * from cdep_glue_trans",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          },
+          {
+            "step_number": "18",
+            "step_name": "ExecuteSQL_query1",
+            "df": "district",
+            "db_name": "cdep_catalog",
+            "statement": "SELECT A1 AS DISTRICT_ID, A3 AS DISTRICT_NAME from cdep_glue_district",
+            "persist": "True",
+            "persist_type": "MEMORY_AND_DISK",
+            "action": "show"
+          }
+        ]
+      }
+    },
+    {
+      "method_name": "JoinTable",
+      "step_number": "9",
+      "step_name": "JoinTable_Join1",
+      "params": {
+        "df": "loan_join_account",
+        "join_type": "left",
+        "join_condition": "loan.account_id = account.account_id",
+        "select_cols": "loan.*, account.district_id, account.frequency, account.date as account_date",
+        "join_filter": "",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "table1": {
+          "table1_df": "loan",
+          "table1_cols": "*",
+          "table1_filter": ""
+        },
+        "table2": {
+          "table2_df": "account",
+          "table2_cols": "*",
+          "table2_filter": ""
+        },
+        "action": "show"
+      }
+    },
+    {
+      "method_name": "JoinTable",
+      "step_number": "10",
+      "step_name": "JoinTable_Join2",
+      "params": {
+        "df": "order_join_account",
+        "join_type": "left",
+        "join_condition": "order.account_id = account.account_id",
+        "select_cols": "order.*, account.district_id, account.frequency, account.date",
+        "join_filter": "",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "table1": {
+          "table1_df": "order",
+          "table1_cols": "*",
+          "table1_filter": ""
+        },
+        "table2": {
+          "table2_df": "account",
+          "table2_cols": "*",
+          "table2_filter": ""
+        },
+        "action": "show"
+      }
+    },
+    {
+      "method_name": "JoinTable",
+      "step_number": "11",
+      "step_name": "JoinTable_Join3",
+      "params": {
+        "df": "trans_join_account",
+        "join_type": "left",
+        "join_condition": "trans.account_id = account.account_id",
+        "select_cols": "trans.*, account.district_id, account.frequency, account.date",
+        "join_filter": "",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "table1": {
+          "table1_df": "trans",
+          "table1_cols": "*",
+          "table1_filter": ""
+        },
+        "table2": {
+          "table2_df": "account",
+          "table2_cols": "*",
+          "table2_filter": ""
+        },
+        "action": "show"
+      }
+    },
+    {
+      "method_name": "JoinTable",
+      "step_number": "12",
+      "step_name": "JoinTable_Join4",
+      "params": {
+        "df": "disp_join_account",
+        "join_type": "left",
+        "join_condition": "disp.account_id = account.account_id",
+        "select_cols": "disp.*, account.district_id, account.frequency, account.date",
+        "join_filter": "",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "table1": {
+          "table1_df": "disp",
+          "table1_cols": "*",
+          "table1_filter": ""
+        },
+        "table2": {
+          "table2_df": "account",
+          "table2_cols": "*",
+          "table2_filter": ""
+        },
+        "action": "show"
+      }
+    },
+    {
+      "method_name": "JoinTable",
+      "step_number": "13",
+      "step_name": "JoinTable_Join5",
+      "params": {
+        "df": "card_join_disp",
+        "join_type": "left",
+        "join_condition": "card.disp_id = disp.disp_id",
+        "select_cols": "card.*, disp.client_id, disp.account_id, disp.type AS disp_type",
+        "join_filter": "",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "table1": {
+          "table1_df": "card",
+          "table1_cols": "*",
+          "table1_filter": ""
+        },
+        "table2": {
+          "table2_df": "disp",
+          "table2_cols": "*",
+          "table2_filter": ""
+        },
+        "action": "show"
+      }
+    },
+    {
+      "method_name": "JoinTable",
+      "step_number": "14",
+      "step_name": "JoinTable_Join6",
+      "params": {
+        "df": "card_join_disp_join_account",
+        "join_type": "left",
+        "join_condition": "card_join_disp.account_id = account.account_id",
+        "select_cols": "card_join_disp.*, account.district_id, account.frequency, account.date as account_date",
+        "join_filter": "",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "table1": {
+          "table1_df": "card_join_disp",
+          "table1_cols": "*",
+          "table1_filter": ""
+        },
+        "table2": {
+          "table2_df": "account",
+          "table2_cols": "*",
+          "table2_filter": ""
+        },
+        "action": "show"
+      }
+    },
+    {
+      "method_name": "MultiTableJoin",
+      "step_number": "15",
+      "step_name": "MultiTable_Join1",
+      "params": {
+        "df": "card_join_disp_join_account_multi",
+        "join_condition": "card.disp_id = disp.disp_id AND disp.account_id = account.account_id",
+        "select_cols": "card.*, disp.client_id, disp.account_id, disp.type AS disp_type, account.district_id, account.frequency, account.date as account_date",
+        "join_filter": "",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "tables": {
+          "table1": "card",
+          "table2": "disp",
+          "table3": "account"
+        },
+        "joins": {
+          "join1": "left",
+          "join2": "inner"
+        },
+        "action": "show"
+      }
+    },
+        {
+      "method_name": "JoinTable",
+      "step_number": "14",
+      "step_name": "card_join_disp_join_account_join_district",
+      "params": {
+        "df": "card_join_disp_join_account_join_district",
+        "join_type": "left",
+        "join_condition": "card_join_disp_join_account.district_id = district.district_id",
+        "select_cols": "card_join_disp_join_account.*, district.DISTRICT_NAME",
+        "join_filter": "",
+        "persist": "True",
+        "persist_type": "MEMORY_AND_DISK",
+        "table1": {
+          "table1_df": "card_join_disp_join_account",
+          "table1_cols": "*",
+          "table1_filter": ""
+        },
+        "table2": {
+          "table2_df": "district",
+          "table2_cols": "*",
+          "table2_filter": ""
+        },
+        "action": "show"
+      }
+    },
+    {
+      "method_name": "Write",
+      "step_name": "save_card_join_disp_join_account",
+      "step_number": "16",
+      "params": {
+        "format": "csv",
+        "overwrite": true,
+        "df": "card_join_disp_join_account",
+        "path": "s3://cdep/CDEP_Catalog/cdep_financial/card_join_disp_join_account/",
+        "partition": true,
+        "persist": "",
+        "persist_type": ""
+      }
+    },
+    {
+      "method_name": "Write",
+      "step_name": "save_loan_join_account",
+      "step_number": "17",
+      "params": {
+        "format": "csv",
+        "overwrite": true,
+        "df": "loan_join_account",
+        "path": "s3://cdep/CDEP_Catalog/cdep_financial/loan_join_account/",
+        "partition": true,
+        "persist": "",
+        "persist_type": ""
+      }
+    },
+    {
+      "method_name": "Write",
+      "step_name": "save_card_join_disp_join_account_join_district",
+      "step_number": "20",
+      "params": {
+        "format": "csv",
+        "overwrite": true,
+        "df": "card_join_disp_join_account_join_district",
+        "path": "s3://cdep/CDEP_Catalog/cdep_financial/card_join_disp_join_account_join_district/",
+        "partition": true,
+        "persist": "",
+        "persist_type": ""
+      }
+    }
+  ]
+}

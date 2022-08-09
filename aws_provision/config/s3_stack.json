@@ -1,0 +1,29 @@
+{
+    "buckets":[
+        {
+            "bucket_name": "dep-qa"
+        },
+        {
+            "bucket_name": "dep-dev"
+        },
+        {
+            "bucket_name": "dep-prod"
+        }],
+        
+        "folders":
+        [
+            "clientname/datasetname/Incoming/",
+            "clientname/datasetname/Incoming/archive/",
+            "clientname/datasetname/Preprocessor/tackingid/file/",
+            "datasetname/ruleengine/valid/tackingid/file or invalid/tackingid/file /",
+            "clientname/datasetname/ruleengine/input/",
+            "clientname/datasetname/dataprocessor/tackingid/file"
+        
+        
+                
+            
+        ]
+        
+    
+    
+}

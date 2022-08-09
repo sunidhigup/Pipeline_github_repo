@@ -1,0 +1,64 @@
+{
+  "app": "python app.py",
+  "context": {
+    "@aws-cdk/core:enableStackNameDuplicates": "true",
+    "aws-cdk:enableDiffNoFail": "true",
+    "@aws-cdk/core:stackRelativeExports": "true",
+    "@aws-cdk/aws-ecr-assets:dockerIgnoreSupport": true,
+    "@aws-cdk/aws-secretsmanager:parseOwnedSecretName": true,
+    "@aws-cdk/aws-kms:defaultKeyPolicies": true,
+    "@aws-cdk/core:newStyleStackSynthesis": "true",
+
+    "dev": {
+      "region": "us-east-1",
+      "account": "601434740765",
+      "tags": {
+        "environment": "cdep-dev",
+        "project": "CDEP",
+        "service": "",
+        "tenant": ""
+      },
+      "vpc_config":"config/vpc_config.json",
+      "s3_stack":"config/s3_stack.json",
+      "dynamo_config":"config/dynamo_config.json",
+      "emr_config":"config/emr_config.json",
+      "iam_config":"config/role_policy.json",
+      "lambda_config":"config/lambda_resource.json",
+      "sc_group_config":"config/security_group_config.json",
+      "kinesis_config":"config/kinesis_config.json",
+      "secret_config":"config/secret_config.json",
+      "step_config":"config/step_resource.json",
+      "ecs_config":"config/ecs_config.json",
+      "ebs_config":"config/elastic_beanstalk_config.json",
+      "sqs_config":"config/sqs_config.json",
+      "log_config":"config/log_config.json"
+    
+    },
+    "qa": {
+      "region": "us-east-1",
+      "account": "601434740765",
+     
+      "tags": {
+        "environment": "cdep-qa",
+        "project": "CDEP",
+        "service": "",
+        "tenant": ""
+      },
+      "vpc_config":"config/vpc_config.json",
+      "s3_stack":"config/s3_stack.json",
+      "dynamo_config":"config/dynamo_config.json",
+      "emr_config":"config/emr_config.json",
+      "iam_config":"config/role_policy.json",
+      "lambda_config":"config/lambda_resource.json",
+      "sc_group_config":"config/security_group_config.json",
+      "kinesis_config":"config/kinesis_config.json",
+      "secret_config":"config/secret_config.json",
+      "step_config":"config/step_resource.json",
+      "ecs_config":"config/ecs_config.json",
+      "ebs_config":"config/elastic_beanstalk_config.json",
+      "sqs_config":"config/sqs_config.json",
+      "log_config":"config/log_config.json"
+    }
+  }
+
+}

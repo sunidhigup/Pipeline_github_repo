@@ -1,0 +1,11 @@
+class mapper_constants:
+    INFO = "Info"
+    BATCH_ID = "batch_id"
+    STEP_NUMBER = "step_number"
+    STEP_NAME = "step_name"
+    START_TIME = "start_time"
+    STATUS = "status"
+    STATUS_RUNNING = "Running"
+    STATUS_COMPLETED = "Completed"
+    END_TIME = "end_time"
+    INFO_STATEMENT = "CDEP- Inside multi_table_join_mapper.join()"

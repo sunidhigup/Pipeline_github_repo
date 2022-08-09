@@ -1,0 +1,46 @@
+{
+    "jsonversion": "1.0",
+    "revision": "1.0",
+    "filetype": "DELIMITED",
+    "delimiter": ",",
+    "fields": [
+        {
+            "fieldname": "empno",
+            "size": 19,
+            "scale": 0,
+            "type": "integer"
+        },
+        {
+            "fieldname": "ename",
+             "size": 23,
+            "type": "string"
+        },
+        {
+            "fieldname": "designation",
+            "size": 22,
+            "scale": 4,
+            "type": "string"
+        },
+        {
+            "fieldname": "manager",
+            "size": 20,
+            "type": "string"
+        },
+        {
+            "fieldname": "hire_date",
+            "size": 22,
+            "scale": 4,
+            "type": "date"
+        },
+        {
+            "fieldname": "sal",
+            "size": 16,
+            "type": "double"
+        },
+        {
+            "fieldname": "deptno",
+            "size": 21,
+            "type": "integer"
+        }
+    ]
+}
