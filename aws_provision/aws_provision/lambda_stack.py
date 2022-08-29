@@ -1,7 +1,12 @@
-from aws_cdk import core
-from provision.resources.iam_job_role import JobIAmRole
+from aws_cdk import (
+    core,
+    aws_lambda as _lambda,
+    aws_iam as _iam)
 from provision.resources.job_lambda import JobLambda
+from provision.resources.iam_job_role import JobIAmRole
 from constant.constant import STACKS_CONSTANTS
+from constant.constant import LAMBDA
+
 
 
 class Dep_lambda_stack(core.Stack):
@@ -26,7 +31,9 @@ class Dep_lambda_stack(core.Stack):
         lambda_path= self.node.try_get_context(self.cfg)[STACKS_CONSTANTS.LAMBDA_CONFIG]
         role_path = self.node.try_get_context(self.cfg)[STACKS_CONSTANTS.IAM_CONFIG]
 
+        
         # Creating resources
         roles = JobIAmRole.createAll(self, role_path)
+       # roles = IAMROLES.ROLES
         # Creating resources
-        lambda_functions= JobLambda.createAll(self,lambda_path,roles)
+        JobLambda.createAll(self,lambda_path,roles)
