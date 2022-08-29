@@ -10,7 +10,7 @@
     "@aws-cdk/core:newStyleStackSynthesis": "true",
 
     "dev": {
-      "region": "us-east-1",
+      "region": "eu-west-1",
       "account": "955658629586",
       "tags": {
         "environment": "cdep-dev",
