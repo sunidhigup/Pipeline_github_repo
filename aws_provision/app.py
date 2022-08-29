@@ -9,7 +9,6 @@ from aws_provision.S3_stack import S3_Stack
 from aws_provision.Infra_stack import Dep_infra_Stack
 from aws_provision.lambda_stack import Dep_lambda_stack
 
-
 app = core.App()
 
 env_qa_us = core.Environment(account=app.node.try_get_context('qa')['account'],
@@ -25,6 +24,6 @@ env_dev_us = core.Environment(account=app.node.try_get_context('dev')['account']
 Dep_DB_Stack(app, "dep-db-qa", env=env_dev_us, config="dev")
 Dep_infra_Stack(app, "dep-infra-qa", env=env_dev_us, config="dev")
 S3_Stack(app, "dep-s3-qa", env=env_dev_us, config="dev")
-Dep_lambda_stack(app, "dep-lambda-qa", env=env_dev_us, config="dev")
+Dep_lambda_stack(app, "dep-lambda-stack", env=env_dev_us, config="dev")
 
 app.synth()
