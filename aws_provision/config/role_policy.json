@@ -1,5 +1,5 @@
 {
-  "dep_emr_spark_role": {
+  "dep_emr_spark_role1": {
     
     "standard": [
       "AmazonSQSFullAccess",
@@ -14,7 +14,7 @@
     ],
     "service-principal": "lambda.amazonaws.com"
   },
-  "StepFunctions-Resource-role": {
+  "StepFunctions-Resource-role1": {
     "standard": [
       "AmazonECS_FullAccess",
       "AWSLambda_FullAccess"
