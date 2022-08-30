@@ -17,32 +17,32 @@
     "endpoints": [
       {
         "endpoint_type": "Interface",
-        "service_name": "com.amazonaws.us-east-1.logs",
+        "service_name": "com.amazonaws.eu-west-1.logs",
         "subnet_names": []
       },
       {
         "endpoint_type": "Interface",
-        "service_name": "com.amazonaws.us-east-1.ecr.api",
+        "service_name": "com.amazonaws.eu-west-1.ecr.api",
         "subnet_names": []
       },
       {
         "endpoint_type": "Interface",
-        "service_name": "com.amazonaws.us-east-1.ecr.dkr",
+        "service_name": "com.amazonaws.eu-west-1.ecr.dkr",
         "subnet_names": []
       },
       {
         "endpoint_type": "Gateway",
-        "service_name": "com.amazonaws.us-east-1.s3",
+        "service_name": "com.amazonaws.eu-west-1.s3",
         "subnet_names": []
       },
       {
         "endpoint_type": "Interface",
-        "service_name": "com.amazonaws.us-east-1.elasticmapreduce",
+        "service_name": "com.amazonaws.eu-west-1.elasticmapreduce",
         "subnet_names":[]
       },
       {
         "endpoint_type": "Gateway",
-        "service_name": "com.amazonaws.us-east-1.dynamodb",
+        "service_name": "com.amazonaws.eu-west-1.dynamodb",
         "subnet_names": []
       }
     ]
