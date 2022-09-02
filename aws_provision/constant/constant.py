@@ -12,13 +12,13 @@ class LAMBDA:
     LAYER_VERSION_NAME = "functional-dependecy-layer"
     S3_BUCKET="customer360generic"
     S3_PATH= "raw/function-dependency.zip"
-    ROLE_NAME = "dep_emr_spark_role1"
+    ROLE_NAME = "dep_emr_spark_role"
     ROLE_ARN="arn:aws:iam::955658629586:role/service-role/dep_emr_spark_trigger-role-urgun2up"
     PANDA_LAYER='Pandas_numpy'
     PANDA_ARN='arn:aws:lambda:us-east-1:955658629586:layer:Pandas_numpy:1'
 
 class STEPFUNCTION:
-    ROLE_NAME= "StepFunctions-Resource-role1"
+    ROLE_NAME= "StepFunctions-Resource-role"
     ROLE_ARN="arn:aws:iam::955658629586:role/service-role/StepFunctions-Cdep_resource_management-role-3afb1986"
 
 class SECURITYGROUP:
