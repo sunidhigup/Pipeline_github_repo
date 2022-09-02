@@ -8,7 +8,7 @@ from aws_provision.S3_stack import S3_Stack
 # from aws_provision.aws_provision_stack import AwsProvisionStack
 from aws_provision.Infra_stack import Dep_infra_Stack
 from aws_provision.lambda_stack import Dep_lambda_stack
-from aws_provision.ecs_stack import Dep_ECS_Stack
+#from aws_provision.ecs_stack import Dep_ECS_Stack
 from aws_provision.stepfunction import Dep_stepfunction_Stack
 from aws_provision.vpc_stack import Dep_vpc_Stack
 
