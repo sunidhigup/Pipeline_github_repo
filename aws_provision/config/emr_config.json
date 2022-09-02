@@ -6,7 +6,7 @@
     },
     "EMR": {
         "id":"emr_cluster_cdk",
-        "subnet_id":"subnet-07176bf1557022c31",
+        "subnet_id":"subnet-0b3d656de8ca609e0",
         "hadoop_ver":"Amazon",
         "cluster_alive_status":true,
         "master_config":{
