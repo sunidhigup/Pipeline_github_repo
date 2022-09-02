@@ -29,7 +29,7 @@ Dep_infra_Stack(app, "dep-infra-qa", env=env_dev_us, config="dev")
 S3_Stack(app, "dep-s3-qa", env=env_dev_us, config="dev")
 Dep_lambda_stack(app, "dep-lambda-stack", env=env_dev_us, config="dev")
 Dep_ECS_Stack(app, "dep-ecs-stack", env=env_dev_us, config="dev")
-Dep_stepfunction_Stack(app, "dep-stepfucntion-stack", env=env_dev_us, config="dev")
+Dep_stepfunction_Stack(app, "dep-stepfunction-stack", env=env_dev_us, config="dev")
 Dep_vpc_Stack(app, "dep-vpc-stack", env=env_dev_us, config="dev")
 
 app.synth()
