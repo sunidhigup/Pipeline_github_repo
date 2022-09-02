@@ -12,6 +12,7 @@ from aws_provision.lambda_stack import Dep_lambda_stack
 from aws_provision.stepfunction import Dep_stepfunction_Stack
 from aws_provision.vpc_stack import Dep_vpc_Stack
 from aws_provision.kinesis_stack import Dep_kinesis_Stack
+from aws_provision.emr_stack import Dep_EMR_Stack
 
 
 app = core.App()
@@ -34,5 +35,7 @@ Dep_lambda_stack(app, "dep-lambda-stack", env=env_dev_us, config="dev")
 Dep_stepfunction_Stack(app, "dep-stepfunction-stack", env=env_dev_us, config="dev")
 Dep_vpc_Stack(app, "dep-vpc-stack", env=env_dev_us, config="dev")
 Dep_kinesis_Stack(app, "dep-kinesis-stack", env=env_dev_us, config="dev")
+Dep_EMR_Stack(app, "dep-emr-stack", env=env_dev_us, config="dev")
+
 
 app.synth()
