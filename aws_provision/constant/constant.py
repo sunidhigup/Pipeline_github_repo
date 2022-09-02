@@ -1,11 +1,11 @@
-# class EMR:
-#     """
-#      Contains all the constant used
-#     """    
-#     CLASSIFICATION = ["spark-env","export","spark"]
-#     PYSPARK_PYTHON = "/usr/bin/python3"
-#     PYSPARK_DRIVER_PYTHON = "/usr/bin/python3"
-#     ResourceAllocation = "true"
+class EMR:
+    """
+     Contains all the constant used
+   """    
+    CLASSIFICATION = ["spark-env","export","spark"]
+    PYSPARK_PYTHON = "/usr/bin/python3"
+    PYSPARK_DRIVER_PYTHON = "/usr/bin/python3"
+    ResourceAllocation = "true"
 
 class LAMBDA:
     LAYER_ID = "functional-dependecy"
