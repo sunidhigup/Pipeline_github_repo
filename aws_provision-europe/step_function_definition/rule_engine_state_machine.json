@@ -1,0 +1,252 @@
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "Read Sqs messages",
+  "States": {
+    "Read Sqs messages": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:955658629586:function:rule_read_sqs_sf"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Check available clusters"
+    },
+    "Check available clusters": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:955658629586:function:rule_cluster_sf"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Retrieve cores"
+    },
+    "Retrieve cores": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:955658629586:function:rule_retrivecore_sf"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Check if cluster has enough cores"
+    },
+    "Check if cluster has enough cores": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.cluster_available",
+          "BooleanEquals": true,
+          "Next": "Wait"
+        }
+      ],
+      "Default": "Create cluster"
+    },
+    "Wait": {
+      "Type": "Wait",
+      "Seconds": 5,
+      "Next": "Check batch message status"
+    },
+    "Check batch message status": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:955658629586:function:rule_checkmsg_sf"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Check if more batches available"
+    },
+    "Check if more batches available": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.msg_exist",
+          "BooleanEquals": true,
+          "Next": "Read Sqs messages"
+        }
+      ],
+      "Default": "Check clusters state"
+    },
+    "Check clusters state": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:955658629586:function:rule_emrstatus_sf"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "If all clusters are available"
+    },
+    "If all clusters are available": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.state",
+          "StringEquals": "Ready",
+          "Next": "Submit job"
+        },
+        {
+          "Variable": "$.state",
+          "StringEquals": "Wait",
+          "Next": "Wait 1 minute"
+        }
+      ]
+    },
+    "Submit job": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:955658629586:function:rule_submit_sf"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Check pending jobs"
+    },
+    "Check pending jobs": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.steps_pending",
+          "BooleanEquals": true,
+          "Next": "Check jobs status"
+        },
+        {
+          "Variable": "$.steps_pending",
+          "BooleanEquals": false,
+          "Next": "Success"
+        }
+      ]
+    },
+    "Check jobs status": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:955658629586:function:rule_jobstatus_sf"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Wait 10 sec"
+    },
+    "Wait 10 sec": {
+      "Type": "Wait",
+      "Seconds": 10,
+      "Next": "Submit job"
+    },
+    "Success": {
+      "Type": "Succeed"
+    },
+    "Create cluster": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:955658629586:function:rule_createemr_sf"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Wait"
+    },
+    "Wait 1 minute": {
+      "Type": "Wait",
+      "Seconds": 60,
+      "Next": "Check clusters state"
+    }
+  }
+}

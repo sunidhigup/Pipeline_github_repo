@@ -1,0 +1,51 @@
+{
+
+    "vpc":
+      {
+        "vpc_name":"Dep_vpc",
+        "cidr":"10.0.0.0/16",
+        "subnet_pvt_name":"Dep-private",
+        "subnet_pub_name_1":"Dep-Public-1",
+        "subnet_pub_name_2":"Dep-Public-2",
+        "availability_zones": ["eu-west-1a","eu-west-1b"],
+        "nat_gateways":1,
+        "max_azs":2,
+        "cidr_pvt_mask":24,
+        "cidr_pub_mask":20
+      }
+    ,
+     
+  
+    "endpoints": [
+      {
+        "endpoint_type": "Interface",
+        "service_name": "com.amazonaws.eu-west-1.logs",
+        "subnet_names": []
+      },
+      {
+        "endpoint_type": "Interface",
+        "service_name": "com.amazonaws.eu-west-1.ecr.api",
+        "subnet_names": []
+      },
+      {
+        "endpoint_type": "Interface",
+        "service_name": "com.amazonaws.eu-west-1.ecr.dkr",
+        "subnet_names": []
+      },
+      {
+        "endpoint_type": "Gateway",
+        "service_name": "com.amazonaws.eu-west-1.s3",
+        "subnet_names": []
+      },
+      {
+        "endpoint_type": "Interface",
+        "service_name": "com.amazonaws.eu-west-1.elasticmapreduce",
+        "subnet_names":[]
+      },
+      {
+        "endpoint_type": "Gateway",
+        "service_name": "com.amazonaws.eu-west-1.dynamodb",
+        "subnet_names": []
+      }
+    ]
+}

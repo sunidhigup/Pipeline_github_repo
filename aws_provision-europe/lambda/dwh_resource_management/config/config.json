@@ -1,0 +1,8 @@
+{
+    "ZIP_PATH" : "s3://cdep/rule_engine/code/Rule_Engine.zip",
+    "JAR_PATH" : "s3://cdep/rule_engine/jars/cdep-udf-date_2.11-1.1.11.jar,s3://cdep/rule_engine/jars/cdep-udf-numeric_2.11-1.1.4.jar",
+    "FILE_PATH" : "s3://cdep/rule_engine/code/run_rule_engine.py",
+    "LOG_GROUP"  : "/aws/vendedlogs/states/CDEP_STATE_MACHINE_1-Logs",
+    "table_name" : "dep_emr",
+    "region_name" : "us-east-1"
+}

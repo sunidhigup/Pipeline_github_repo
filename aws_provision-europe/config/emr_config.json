@@ -1,0 +1,23 @@
+{
+    "service_role" : {
+        "name":"emr_service_role",
+        "assumed_by":"elasticmapreduce.amazonaws.com",
+        "policy":"service-role/AmazonElasticMapReduceRole"
+    },
+    "EMR": {
+        "id":"emr_cluster_cdk",
+        "subnet_id":"subnet-0b3d656de8ca609e0",
+        "hadoop_ver":"Amazon",
+        "cluster_alive_status":true,
+        "master_config":{
+            "count":1,
+            "type":"m4.large",
+            "market":"SPOT"
+        },
+        "job_flow_role":"EMR_EC2_DefaultRole",
+        "name":"CDEP-cdk",
+        "application":"spark",
+        "version":"emr-6.3.0"
+
+    }
+}

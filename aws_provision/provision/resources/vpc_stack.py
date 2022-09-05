@@ -23,14 +23,14 @@ class VpcStack(core.Stack):
                 self, vpc_name, cidr=config['vpc']['cidr'], nat_gateways=0,max_azs=config['vpc']['max_azs'],
                 subnet_configuration=[ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PUBLIC,
-                    name=config['vpc']['subnet_pub_name'],
+                    name=config['vpc']['subnet_pub_name_1'],
                     cidr_mask=config['vpc']['cidr_pub_mask']
-                )
-                #  ec2.SubnetConfiguration(
-                #      subnet_type=ec2.SubnetType.PRIVATE,
-                #         name=config['vpc']['subnet_pvt_name'],
-                #         cidr_mask=config['vpc']['cidr_pvt_mask']
-                # )
+                ),
+                  ec2.SubnetConfiguration(
+                      subnet_type=ec2.SubnetType.PUBLIC,
+                         name=config['vpc']['subnet_pub_name_2'],
+                         cidr_mask=config['vpc']['cidr_pvt_mask']
+                 )
                  ]
 
             )

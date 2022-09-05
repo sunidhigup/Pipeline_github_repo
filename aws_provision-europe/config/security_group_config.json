@@ -1,0 +1,182 @@
+{
+
+  
+  "ElasticMapReduce-Master-Private": {
+    "group_description": "EMR Security Group",
+    "Inbound": [
+      {
+        "id": "ElasticMapReduce-Master-Private_1",
+        "ip_protocol": "TCP",
+        "from_port": 0,
+        "to_port": 65535,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_2",
+        "ip_protocol": "TCP",
+        "from_port": 0,
+        "to_port": 65535,
+        "source_security_group_name": "ElasticMapReduce-Slave-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_3",
+        "ip_protocol": "TCP",
+        "from_port": 8443,
+        "to_port": 8443,
+        "source_security_group_name": "ElasticMapReduce-ServiceAccess"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_4",
+        "ip_protocol": "TCP",
+        "from_port": 8998,
+        "to_port": 8998,
+        "source_security_group_name": "livy-sg-pvt"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_5",
+        "ip_protocol": "TCP",
+        "from_port": 8998,
+        "to_port": 8998,
+        "source_security_group_name": "dynamodb-sg-pvt"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_6",
+        "ip_protocol": "TCP",
+        "from_port": 8998,
+        "to_port": 8998,
+        "source_security_group_name": "ElasticMapReduce-ServiceAccess"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_7",
+        "ip_protocol": "UDP",
+        "from_port": 0,
+        "to_port": 65535,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_8",
+        "ip_protocol": "UDP",
+        "from_port": 0,
+        "to_port": 65535,
+        "source_security_group_name": "ElasticMapReduce-Slave-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_9",
+        "ip_protocol": "ICMP",
+        "from_port": -1,
+        "to_port": -1,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Master-Private_10",
+        "ip_protocol": "ICMP",
+        "from_port": -1,
+        "to_port": -1,
+        "source_security_group_name": "ElasticMapReduce-Slave-Private"
+      }
+    ],
+    "Outbound": []
+  },
+  "ElasticMapReduce-Slave-Private": {
+    "group_description": "EMR Security Group",
+    "Inbound": [
+      {
+        "id": "ElasticMapReduce-Slave-Private_1",
+        "ip_protocol": "TCP",
+        "from_port": 0,
+        "to_port": 65535,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Slave-Private_2",
+        "ip_protocol": "TCP",
+        "from_port": 0,
+        "to_port": 65535,
+        "source_security_group_name": "ElasticMapReduce-Slave-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Slave-Private_3",
+        "ip_protocol": "TCP",
+        "from_port": 8443,
+        "to_port": 8443,
+        "source_security_group_name": "ElasticMapReduce-ServiceAccess"
+      },
+      {
+        "id": "ElasticMapReduce-Slave-Private_4",
+        "ip_protocol": "UDP",
+        "from_port": 0,
+        "to_port": 65535,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Slave-Private_5",
+        "ip_protocol": "UDP",
+        "from_port": 0,
+        "to_port": 65535,
+        "source_security_group_name": "ElasticMapReduce-Slave-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Slave-Private_6",
+        "ip_protocol": "ICMP",
+        "from_port": -1,
+        "to_port": -1,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      },
+      {
+        "id": "ElasticMapReduce-Slave-Private_7",
+        "ip_protocol": "ICMP",
+        "from_port": -1,
+        "to_port": -1,
+        "source_security_group_name": "ElasticMapReduce-Slave-Private"
+      }
+    ],
+    "Outbound": []
+  },
+  "ElasticMapReduce-ServiceAccess": {
+    "group_description": "Emr security group",
+    "Inbound": [
+      {
+        "id": "ElasticMapReduce-ServiceAccess_1",
+        "ip_protocol": "TCP",
+        "from_port": 9443,
+        "to_port": 9443,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      }
+    ],
+    "Outbound": [
+      {
+        "id": "outbound_ElasticMapReduce-ServiceAccess_1",
+        "ip_protocol": "TCP",
+        "from_port": 8443,
+        "to_port": 8443,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      },
+      {
+        "id": "outbound_ElasticMapReduce-ServiceAccess_2",
+        "ip_protocol": "TCP",
+        "from_port": 8443,
+        "to_port": 8443,
+        "source_security_group_name": "ElasticMapReduce-Slave-Private"
+      },
+      {
+        "id": "outbound_ElasticMapReduce-ServiceAccess_3",
+        "ip_protocol": "TCP",
+        "from_port": 8998,
+        "to_port": 8998,
+        "source_security_group_name": "ElasticMapReduce-Master-Private"
+      }
+    ]
+  },
+  "livy-sg-pvt": {
+    "group_description": "livy security group",
+    "Inbound": [],
+    "Outbound": []
+  },
+  "dynamodb-sg-pvt": {
+    "group_description": "dynamo db security group",
+    "Inbound": [],
+    "Outbound": [
+
+    ]
+  }
+}

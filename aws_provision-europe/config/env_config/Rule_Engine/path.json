@@ -1,0 +1,53 @@
+{
+	"dev": {
+		"S3_DETAILS": {
+			"bucket_name": "dep-develop",
+			"input_folder_prefix": "Input",
+			"rule_folder_prefix": "Rule/",
+			"RULE_ENGINE": "Rule_engine/",
+			"processed_folder_prefix": "Processed/",
+			"output_valid_path": "Output/valid/",
+			"output_invalid_path": "output/invalid/",
+			"jar_folder_path": "s3://dep-develop/rule_engine/jars/*",
+			"ZIP_PATH": "s3://dep-develop/rule_engine/zip/Rule_Engine.zip",
+			"JAR_PATH": "s3://dep-develop/rule_engine/jars/DATE.jar,s3://dep-develop/rule_engine/jars/Numeric.jar",
+			"FILE_PATH": "s3://dep-develop/rule_engine/zip/run_rule_engine.py",
+			"file_extension": [".txt", ".csv", ".json"]
+
+		}
+	},
+
+	"qa": {
+		"S3_DETAILS": {
+			"bucket_name": "dep-qa",
+			"input_folder_prefix": "Input",
+			"processed_folder_prefix": "Processed/",
+			"output_valid_path": "Output/valid/",
+			"output_invalid_path": "output/invalid/",
+			"jar_folder_path": "s3://dep-qa/rule_engine/jars/*",
+			"ZIP_PATH": "s3://dep-qa/rule_engine/zip/Rule_Engine.zip",
+			"JAR_PATH": "s3://dep-qa/rule_engine/jars/DATE.jar,s3://dep-qa/rule_engine/jars/Numeric.jar",
+			"FILE_PATH": "s3://dep-qa/rule_engine/zip/run_rule_engine.py",
+			"file_extension": [".txt", ".csv", ".json"],
+			"RULE_ENGINE": "Rule_engine/",
+			"rule_folder_prefix": "Rule/"
+		}
+	},
+
+	"prod": {
+		"S3_DETAILS": {
+			"bucket_name": "dep-prod",
+			"input_folder_prefix": "Input",
+			"processed_folder_prefix": "Processed/",
+			"output_valid_path": "Output/valid/",
+			"output_invalid_path": "output/invalid/",
+			"jar_folder_path": "s3://dep-prod/rule_engine/jars/*",
+			"ZIP_PATH": "s3://dep-prod/rule_engine/zip/Rule_Engine.zip",
+			"JAR_PATH": "s3://dep-prod/rule_engine/jars/DATE.jar,s3://dep-prod/rule_engine/jars/Numeric.jar",
+			"FILE_PATH": "s3://dep-prod/rule_engine/zip/run_rule_engine.py",
+			"file_extension": [".txt", ".csv", ".json"],
+			"RULE_ENGINE": "Rule_engine/",
+			"rule_folder_prefix": "Rule/"
+		}
+	}
+}

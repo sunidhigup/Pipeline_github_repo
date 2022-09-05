@@ -1,0 +1,25 @@
+{
+    "cluster_name":"CDEPCluster",
+    "cluster_id" : "createclusterid",
+    "task_id":"TaskDef",
+    "cpu":4096,
+    "memory_limit":12288,
+    "image_tag": "latest",
+    "container_name":"NewContainer",
+    "image_id":"Cdep_Image",
+    "directory":"./../Preprocess_Engine",
+    "stream_prefix":"EventDemo",
+    "step_id":"Preprocessing-StepFunction",
+    "step_name":"Ecs-Fargate-StepFunction",
+    "timeout":900,
+    "subnet_1":{
+        "name":"subnetid1",
+        "zone":"us-east-1a",
+        "subnet_id":"subnet-07176bf1557022c31"
+    },
+    "subnet_2":{
+        "name":"subnetid2",
+        "zone":"us-east-1a",
+        "subnet_id":"subnet-0a6746d4b84d0eeac"
+    }
+}

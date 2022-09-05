@@ -1,0 +1,83 @@
+{
+  
+  "cdep_execute_data_processor":{
+    "handler":"call_dwh_stepfunction.lambda_handler",
+    "code_path": "././lambda/Resource_manegement"
+  },
+  "cdep_execute_ruleengine":{
+    "handler":"call_ruleengine_stepfunction.lambda_handler",
+    "code_path": "././lambda/Resource_manegement"
+  },
+  "cdep_write_sqs":{
+    "handler":"write_sqs.lambda_handler",
+    "code_path": "././lambda/Resource_manegement"
+  },
+  "cdep_dwh_readsqs":{
+    "handler":"read_sqs.lambda_handler",
+    "code_path": "././lambda/dwh_resource_management"
+  },
+  "cdep_dwh_check_active_emr":{
+    "handler":"check_running_emr.lambda_handler",
+    "code_path": "././lambda/dwh_resource_management"
+  },
+  "cdep_dwh_retrievecores":{
+    "handler":"retrieve_emr_cores.lambda_handler",
+    "code_path": "././lambda/dwh_resource_management"
+  },
+  "cdep_dwh_create_emr":{
+    "handler":"create_emr.lambda_handler",
+    "code_path": "././lambda/dwh_resource_management"
+  },
+  "cdep_dwh_check_next_sqs":{
+    "handler":"check_next_sqs_msg.lambda_handler",
+    "code_path": "././lambda/dwh_resource_management"
+  },
+  "cdep_dwh_check_cluster_state":{
+    "handler":"check_cluster_status.lambda_handler",
+    "code_path": "././lambda/dwh_resource_management"
+  },
+  "cdep_dwh_submit_job":{
+    "handler":"submit_spark_job.lambda_handler",
+    "code_path": "././lambda/dwh_resource_management"
+  },
+  "cdep_dwh_check_job_status":{
+    "handler":"check_job_status.lambda_handler",
+    "code_path": "././lambda/dwh_resource_management"
+  },
+  "cdep_rule_engine_readsqs":{
+    "handler":"read_sqs.lambda_handler",
+    "code_path": "././lambda/rule_engine_lambdas"
+  },
+  "cdep_rule_engine_check_active_emr":{
+    "handler":"check_running_emr.lambda_handler",
+    "code_path": "././lambda/rule_engine_lambdas"
+  },
+  "cdep_rule_engine_retrievecores":{
+    "handler":"retrieve_emr_cores.lambda_handler",
+    "code_path": "././lambda/rule_engine_lambdas"
+  },
+  "cdep_rule_engine_create_emr":{
+    "handler":"create_emr.lambda_handler",
+    "code_path": "././lambda/rule_engine_lambdas"
+  },
+  "cdep_rule_engine_check_next_sqs":{
+    "handler":"check_next_sqs_msg.lambda_handler",
+    "code_path": "././lambda/rule_engine_lambdas"
+  },
+  "cdep_rule_engine_check_cluster_state":{
+    "handler":"check_clusters_status.lambda_handler",
+    "code_path": "././lambda/rule_engine_lambdas"
+  },
+  "cdep_rule_engine_submit_job":{
+    "handler":"submit_spark_job.lambda_handler",
+    "code_path": "././lambda/rule_engine_lambdas"
+  },
+  "cdep_rule_engine_check_job_status":{
+    "handler":"check_job_status.lambda_handler",
+    "code_path": "././lambda/rule_engine_lambdas"
+},
+ "dep_landing":{
+  "handler":"dep_landing.lambda_handler",
+  "code_path": "././lambda/Landingtrigger"
+ }
+}

@@ -1,0 +1,140 @@
+{
+    "tables": [
+        {
+            "logical_id": "dep_flowbuilder_batch_status",
+            "table_name": "dep_flowbuilder_batch_status",
+            "part_key": "execution_id"
+        },
+        {
+            "logical_id": "dep_emr",
+            "table_name": "dep_emr",
+            "part_key": "cluster_id"
+        },
+        {
+            "logical_id": "dep_preprocessor_file_classification",
+            "table_name": "dep_preprocessor_file_classification",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_preprocessor_file_classification_status",
+            "table_name": "dep_preprocessor_file_classification_status",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_flowbuilder_job_name",
+            "table_name": "dep_flowbuilder_job_name",
+            "part_key": "job_id"
+        },
+        {
+            "logical_id": "dep_flowbuilder_job_input",
+            "table_name": "dep_flowbuilder_job_input",
+            "part_key": "uniqueId"
+        },
+        {
+            "logical_id": "dep_flowbuilder_job_status",
+            "table_name": "dep_flowbuilder_job_status",
+            "part_key": "execution_id"
+        },
+        {
+            "logical_id": "dep_flowbuilder_job_step_status",
+            "table_name": "dep_flowbuilder_job_step_status",
+            "part_key": "batch_id"
+        },
+        {
+            "logical_id": "dep_flowbuilder_metadata",
+            "table_name": "dep_flowbuilder_metadata",
+            "part_key": "client"
+        },
+        {
+            "logical_id": "dep_stream_metadata",
+            "table_name": "dep_stream_metadata",
+            "part_key": "stream_name"
+        },
+        {
+            "logical_id": "dep_stream_status",
+            "table_name": "dep_stream_status",
+            "part_key": "stream_name"
+        },
+        {
+            "logical_id": "dep_rule_engine_audit_table",
+            "table_name": "dep_rule_engine_audit_table",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_rule_engine_job_status",
+            "table_name": "dep_rule_engine_job_status",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_rule_engine_metadata",
+            "table_name": "dep_rule_engine_metadata",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_rule_engine_resource_management",
+            "table_name": "dep_rule_engine_resource_management",
+            "part_key": "cluster_id"
+        },
+        {
+            "logical_id": "dep_emr_instance_mapping",
+            "table_name": "dep_emr_instance_mapping",
+            "part_key": "instance_id"
+        },
+        {
+            "logical_id": "dep_ui_client_rules_input",
+            "table_name": "dep_ui_client_rules_input",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_ui_global_rules_input",
+            "table_name": "dep_ui_global_rules_input",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_ui_json",
+            "table_name": "dep_ui_json",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_ui_client_info",
+            "table_name": "dep_ui_client_info",
+            "part_key": "client_id"
+        },
+        {
+            "logical_id": "dep_ui_custom_rules_input",
+            "table_name": "dep_ui_custom_rules_input",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_ui_flowbuilder_edges",
+            "table_name": "dep_ui_flowbuilder_edges",
+            "part_key": "fieldId"
+        },
+        {
+            "logical_id": "dep_ui_flowbuilder_steps_input",
+            "table_name": "dep_ui_flowbuilder_steps_input",
+            "part_key": "fieldId"
+        },
+        {
+            "logical_id": "dep_ui_flowbuilder_steps_connection_input",
+            "table_name": "dep_ui_flowbuilder_steps_connection_input",
+            "part_key": "fieldId"
+        },
+        {
+            "logical_id": "dep_ui_rules",
+            "table_name": "dep_ui_rules",
+            "part_key": "rule_name"
+        },
+        {
+            "logical_id": "dep_ui_all_rule_info",
+            "table_name": "dep_ui_all_rule_info",
+            "part_key": "id"
+        },
+        {
+            "logical_id": "dep_ui_batch_status",
+            "table_name": "dep_ui_batch_status",
+            "part_key": "id"
+        }
+
+    ]
+}

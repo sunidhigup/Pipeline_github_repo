@@ -1,0 +1,11 @@
+{
+    "ZIP_PATH" : "s3://cdep/rule_engine/code/Rule_Engine.zip",
+    "JAR_PATH" : "s3://cdep/rule_engine/jars/cdep-udf-date_2.11-1.1.11.jar,s3://cdep/rule_engine/jars/cdep-udf-numeric_2.11-1.1.4.jar",
+    "FILE_PATH" : "s3://cdep/rule_engine/code/run_rule_engine.py",
+    "table_name" : "rule_resource_management",
+    "region_name" : "us-east-1",
+    "BATCH_STATUS_TABLE" : "cdep_batch_status_table",
+    "JOB_STATUS_TABLE" : "rule_engine_job",
+    "SQS_QUEUE" : "cdep_rule.fifo",
+    "INSTANCE_MAP_TABLE" : "dep_instance_mapping"
+}

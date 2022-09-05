@@ -1,0 +1,25 @@
+{
+  "dep_emr_spark_role": {
+    
+    "standard": [
+      "AmazonSQSFullAccess",
+      "AmazonS3FullAccess",
+      "CloudWatchFullAccess",
+      "AmazonDynamoDBFullAccess",
+      "AmazonElasticMapReduceFullAccess",
+      "AmazonVPCCrossAccountNetworkInterfaceOperations",
+      "AWSLambdaExecute",
+      "AWSStepFunctionsFullAccess",
+      "AWSLambda_FullAccess"
+    ],
+    "service-principal": "lambda.amazonaws.com"
+  },
+  "StepFunctions-Resource-role": {
+    "standard": [
+      "AmazonECS_FullAccess",
+      "AWSLambda_FullAccess"
+    ],
+    "service-principal": "states.amazonaws.com"
+
+  }
+}
