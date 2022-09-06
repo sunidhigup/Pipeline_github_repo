@@ -34,6 +34,7 @@ class Dep_ECS_Stack(core.Stack):
         #Fetching VPC id
         vpc_test = ec2.Vpc.from_lookup(self, "vpc", vpc_name="dep-vpc-stack/Dep_vpc")
         #print (vp)
+       
         
         #role = iam.Role.from_role_arn(self, "Role", "arn:aws:iam::955658629586:role/dep_emr_spark_role",
         # Set 'mutable' to 'false' to use the role as-is and prevent adding new
