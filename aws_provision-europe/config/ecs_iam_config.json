@@ -1,0 +1,10 @@
+{
+  "ECSStepFunctions-Resource-role": {
+    "standard": [
+      "AmazonECS_FullAccess",
+      "AWSLambda_FullAccess"
+    ],
+    "service-principal": "states.amazonaws.com"
+
+  }
+}

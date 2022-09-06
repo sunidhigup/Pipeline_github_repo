@@ -32,7 +32,8 @@
       "ecs_config":"config/ecs_config.json",
       "ebs_config":"config/elastic_beanstalk_config.json",
       "sqs_config":"config/sqs_config.json",
-      "log_config":"config/log_config.json"
+      "log_config":"config/log_config.json",
+      "ecs_iam_config": "config/ecs_iam_config.json"
     
     },
     "qa": {

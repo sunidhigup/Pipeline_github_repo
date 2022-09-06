@@ -8,7 +8,7 @@ from aws_cdk import (
     core
 )
 from constant.constant import ECS
-from constant.constant import STEPFUNCTION
+from constant.constant import STEPFUNCTION_ECS
 
 from aws_cdk import aws_stepfunctions as sfn
 from aws_cdk import aws_stepfunctions_tasks as sfn_tasks
@@ -25,7 +25,7 @@ def createEcs(self, path, Vpc,roles):
     # iam_role_for_stepfunction = _iam.Role.from_role_arn(
     #     self, STEPFUNCTION.ROLE_NAME, STEPFUNCTION.ROLE_ARN, mutable=False)
     # iam_role_for_stepfunction = roles[STEPFUNCTION.ROLE_NAME]
-    iam_role_for_stepfunction = roles[STEPFUNCTION.ROLE_NAME]
+    iam_role_for_stepfunction = roles[STEPFUNCTION_ECS.ROLE_NAME]
 
     # execution_role = _iam.Role.from_role_arn(
     #     self, ECS.EXEC_ROLE_NAME, ECS.EXEC_ROLE_ARN, mutable=False)
@@ -120,7 +120,6 @@ def runaimlmodel(self, Fargate_Cluster, Task_Def, Container_Def, path):
 
 def ecs_config(path):
     """ Fetches config for emr
-
     Returns:
         dict : config for emr
     """

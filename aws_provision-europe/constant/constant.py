@@ -1,4 +1,4 @@
-class EMR:
+class EMR: 
     """
      Contains all the constant used
    """    
@@ -21,11 +21,15 @@ class STEPFUNCTION:
     ROLE_NAME= "StepFunctions-Resource-role"
     ROLE_ARN="arn:aws:iam::955658629586:role/service-role/StepFunctions-Cdep_resource_management-role-3afb1986"
 
+class STEPFUNCTION_ECS:
+    ROLE_NAME= "ECSStepFunctions-Resource-role"
+    
 class SECURITYGROUP:
     GROUP_ID="sg-034ffd1fd6650c42c"
     ID= "endpoint-sg-cluster"
 
 class ECS:
+    #ROLE_NAME= "ECS-Resource-role"
     EXEC_ROLE_NAME = "execution_role"
     EXEC_ROLE_ARN = "arn:aws:iam::955658629586:role/ecsTaskExecutionRole"
     TASK_ROLE_NAME = "task_role"
@@ -55,6 +59,7 @@ class STACKS_CONSTANTS:
     ECS_CONFIG = "ecs_config"
     EBS_CONFIG = "ebs_config"
     IAM_CONFIG = "iam_config"
+    ECS_SF_CONFIG = "ecs_iam_config"
     LAMBDA_CONFIG = "lambda_config"
     STEP_CONFIG = "step_config"
     S3_STACK = "s3_stack"
