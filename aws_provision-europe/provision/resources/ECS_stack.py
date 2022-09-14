@@ -35,12 +35,12 @@ def createEcs(self, path, Vpc,roles):
     cluster = ecs.Cluster(self, config["cluster_id"],
                           cluster_name=config["cluster_name"], vpc=Vpc)
 
-    fargate_task_definition = ecs.FargateTaskDefinition(self, config["task_id"],
-                                                        cpu=config["cpu"],
-                                                        memory_limit_mib=config["memory_limit"]
-                                                        # task_role=task_role,
-                                                        # execution_role=execution_role
-                                                        )
+    #fargate_task_definition = ecs.FargateTaskDefinition(self, config["task_id"],
+    #                                                   cpu=config["cpu"],
+    #                                                   memory_limit_mib=config["memory_limit"]
+    #                                                   # task_role=task_role,
+    #                                                   # execution_role=execution_role
+    #                                                   )
 
     # repository = ecr.Repository.from_repository_arn(
     #     self, ECS.REPO_NAME, ECS.REPO_ARN)
@@ -48,42 +48,38 @@ def createEcs(self, path, Vpc,roles):
     # repository = ecr.Repository(self, ECS.REPO_NAME,
     #     image_scan_on_push=True
     # )
-    dock_image = ecr_assets.DockerImageAsset(self, config["image_id"],
-                                             directory=(config["directory"])
-                                             )
-    image = ecs.ContainerImage.from_docker_image_asset(dock_image)
+    #dock_image = ecr_assets.DockerImageAsset(self, config["image_id"],directory=(config["directory"]))
+    #image = ecs.ContainerImage.from_docker_image_asset(dock_image)
     # image = ecs.ContainerImage.from_ecr_repository(
     #     repository=repository, tag=config["image_tag"])
 
-    container = fargate_task_definition.add_container(config["container_name"],
-                                                      image=image,
-                                                      logging=ecs.LogDrivers.aws_logs(
-                                                          stream_prefix=config["stream_prefix"])
-                                                      )
+    #container = fargate_task_definition.add_container(config["container_name"],image=image,
+                                                     # logging=ecs.LogDrivers.aws_logs(
+                                                       #   stream_prefix=config["stream_prefix"]))
 
-    runAIObj = runaimlmodel(
-        self, cluster, fargate_task_definition, container, path)
-    containerFailed_job = sfn.Fail(
-        self, ECS.TASK_FAIL["id"],
-        cause=ECS.TASK_FAIL["cause"],
-        error=ECS.TASK_FAIL["error"]
-    )
-    runaimlmodel_job = runAIObj.add_catch(
-        errors=["States.ALL"], handler=containerFailed_job)
-    definition = runaimlmodel_job
+ #   runAIObj = runaimlmodel(
+  #      self, cluster, fargate_task_definition, container, path)
+  #  containerFailed_job = sfn.Fail(
+   #     self, ECS.TASK_FAIL["id"],
+   #     cause=ECS.TASK_FAIL["cause"],
+   #     error=ECS.TASK_FAIL["error"])
+   # runaimlmodel_job = runAIObj.add_catch(
+    #    errors=["States.ALL"], handler=containerFailed_job)
+   # definition = runaimlmodel_job
 
-    sfn.StateMachine(
-        self, config["step_id"],
-        state_machine_name=config["step_name"],
-        definition=definition,
-        timeout=core.Duration.seconds(config["timeout"]),
-        role=iam_role_for_stepfunction
-    )
+ #   sfn.StateMachine(
+ #       self, config["step_id"],
+  #      state_machine_name=config["step_name"],
+   #     #definition=definition,
+    #    timeout=core.Duration.seconds(config["timeout"]),
+     #   role=iam_role_for_stepfunction
+    #)
 
-    return cluster, fargate_task_definition, container
+    return cluster
+    #fargate_task_definition, container
 
 
-def runaimlmodel(self, Fargate_Cluster, Task_Def, Container_Def, path):
+#def runaimlmodel(self, Fargate_Cluster, Task_Def, Container_Def, path):
     """
     Create stepfunction for Preprocessing
             :param Fargate_Cluster:
